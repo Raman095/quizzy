@@ -1,7 +1,11 @@
-package com.example.presentation.route.quiz_question
+package com.synac.presentation.presentation.route.quiz_question
 
 
-import com.example.domain.repository.QuizQuestionRepository
+import com.synac.presentation.domain.repository.QuizQuestionRepository
+import com.synac.presentation.domain.util.DataError
+import com.synac.presentation.domain.util.onFailure
+import com.synac.presentation.domain.util.onSuccess
+import com.synac.presentation.presentation.util.respondWithError
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.response.respond
 import io.ktor.server.routing.Route
@@ -13,18 +17,16 @@ fun Route.getAllQuizQuestions(
     get(path = "/quiz/questions") {
         val topicCode = call.queryParameters["topicCode"]?.toIntOrNull()
         val limit = call.queryParameters["limit"]?.toIntOrNull()
-        val filteredQuestions = repository.getAllQuestions(topicCode, limit)
-        if(filteredQuestions.isNotEmpty()) {
-            call.respond(
-                message = filteredQuestions,
-                status = HttpStatusCode.OK
-            )
-        }
-        else {
-            call.respond(
-                message = "No Question Found",
-                status = HttpStatusCode.NotFound
-            )
-        }
+        repository.getAllQuestions(topicCode, limit)
+            .onSuccess { questions ->
+                call.respond(
+                    message = questions,
+                    status = HttpStatusCode.OK
+                )
+            }
+            .onFailure { error ->
+                respondWithError(error)
+            }
+
     }
 }

@@ -1,4 +1,4 @@
-package com.example.data.util
+package com.synac.presentation.data.util
 
 object constant {
 

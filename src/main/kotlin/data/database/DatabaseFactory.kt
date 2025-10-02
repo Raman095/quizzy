@@ -1,8 +1,8 @@
-package com.example.data.database
+package com.synac.presentation.data.database
 
 import com.mongodb.kotlin.client.coroutine.MongoClient
 import com.mongodb.kotlin.client.coroutine.MongoDatabase
-import com.example.data.util.constant.MONGO_DATABASE_NAME
+import com.synac.presentation.data.util.constant.MONGO_DATABASE_NAME
 
 object DatabaseFactory {
 
@@ -12,5 +12,4 @@ object DatabaseFactory {
         val mongoClient = MongoClient.create(connectionString)
         return mongoClient.getDatabase(MONGO_DATABASE_NAME)
     }
-
 }

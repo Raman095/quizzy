@@ -1,4 +1,4 @@
-package com.example.presentation.config
+package com.synac.presentation.presentation.config
 
 import io.ktor.server.application.Application
 import io.ktor.server.application.install

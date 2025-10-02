@@ -1,4 +1,4 @@
-package com.example.domain.model
+package com.synac.presentation.domain.model
 
 import kotlinx.serialization.Serializable
 

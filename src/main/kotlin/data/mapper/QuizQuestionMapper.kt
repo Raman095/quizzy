@@ -1,7 +1,7 @@
-package com.example.data.mapper
+package com.synac.presentation.data.mapper
 
-import com.example.data.database.entity.QuizQuestionEntity
-import com.example.domain.model.QuizQuestion
+import data.database.entity.QuizQuestionEntity
+import com.synac.presentation.domain.model.QuizQuestion
 
 fun QuizQuestionEntity.toQuizQuestion() = QuizQuestion(
     id =  _id,

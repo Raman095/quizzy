@@ -1,12 +1,11 @@
-package com.example
+package com.synac.presentation
 
-import com.example.presentation.config.configureLogging
-import com.example.presentation.config.configureRouting
-import com.example.presentation.config.configureSerialization
+import com.synac.presentation.presentation.config.configureLogging
+import com.synac.presentation.presentation.config.configureRouting
+import com.synac.presentation.presentation.config.configureSerialization
+import com.synac.presentation.presentation.config.configureStatusPages
+import com.synac.presentation.presentation.config.configureValidation
 import io.ktor.server.application.*
-import io.ktor.server.response.respondText
-import io.ktor.server.routing.routing
-import io.ktor.server.routing.get
 
 fun main(args: Array<String>) {
     io.ktor.server.netty.EngineMain.main(args)
@@ -14,6 +13,8 @@ fun main(args: Array<String>) {
 
 @Suppress("unused")
 fun Application.module() {
+    configureStatusPages()
+    configureValidation()
     configureSerialization()
     configureRouting()
     configureLogging()

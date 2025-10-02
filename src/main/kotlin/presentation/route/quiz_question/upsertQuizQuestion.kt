@@ -1,7 +1,10 @@
-package com.example.presentation.route.quiz_question
+package com.synac.presentation.presentation.route.quiz_question
 
-import com.example.domain.model.QuizQuestion
-import com.example.domain.repository.QuizQuestionRepository
+import com.synac.presentation.domain.model.QuizQuestion
+import com.synac.presentation.domain.repository.QuizQuestionRepository
+import com.synac.presentation.domain.util.onFailure
+import com.synac.presentation.domain.util.onSuccess
+import com.synac.presentation.presentation.util.respondWithError
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.request.receive
 import io.ktor.server.response.respond
@@ -14,9 +17,15 @@ fun Route.upsertQuizQuestion(
     post(path = "/quiz/questions") {
         val question = call.receive<QuizQuestion>()
         repository.upsertQuestion(question)
-        call.respond(
-            message = "Question added successfully",
-            status = HttpStatusCode.Created
-        )
+            .onSuccess {
+                call.respond(
+                    message = "Question added successfully",
+                    status = HttpStatusCode.Created
+                )
+            }
+            .onFailure { error ->
+                respondWithError(error)
+            }
+
     }
 }

@@ -1,4 +1,4 @@
-package com.example.presentation.config
+package com.synac.presentation.presentation.config
 
 import io.ktor.serialization.kotlinx.json.json
 import io.ktor.server.application.Application

@@ -1,7 +1,9 @@
-package com.example.presentation.route.quiz_question
+package com.synac.presentation.presentation.route.quiz_question
 
-import com.example.domain.model.QuizQuestion
-import com.example.domain.repository.QuizQuestionRepository
+import com.synac.presentation.domain.repository.QuizQuestionRepository
+import com.synac.presentation.domain.util.onFailure
+import com.synac.presentation.domain.util.onSuccess
+import com.synac.presentation.presentation.util.respondWithError
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.response.respond
 import io.ktor.server.routing.Route
@@ -12,25 +14,15 @@ fun Route.getQuizQuestionById(
 ) {
     get("/quiz/questions/{questionId}") {
         val id = call.parameters["questionId"]
-        if (id.isNullOrBlank()) {
-            call.respond(
-                message = "Question Id needed",
-                status = HttpStatusCode.BadRequest
-            )
-            return@get
-        }
-        val question = repository.getQuestionById(id)
-        if (question != null) {
-            call.respond(
-                message = question,
-                status = HttpStatusCode.OK
-            )
-        }
-        else {
-            call.respond(
-                message = "Question not found",
-                status = HttpStatusCode.NotFound
-            )
+        repository.getQuestionById(id)
+            .onSuccess { question ->
+                call.respond(
+                    message = question,
+                    status = HttpStatusCode.OK
+                )
+            }
+            .onFailure { error ->
+                respondWithError(error)
+            }
         }
     }
-}

@@ -1,13 +1,12 @@
-package com.example.presentation.config
+package com.synac.presentation.presentation.config
 
-import com.example.data.database.DatabaseFactory
-import com.example.data.repository.QuizQuestionRepositoryImpl
-import com.example.domain.model.QuizQuestion
-import com.example.domain.repository.QuizQuestionRepository
-import com.example.presentation.route.quiz_question.deleteQuizQuestionById
-import com.example.presentation.route.quiz_question.getAllQuizQuestions
-import com.example.presentation.route.quiz_question.upsertQuizQuestion
-import com.example.presentation.route.quiz_question.getQuizQuestionById
+import com.synac.presentation.data.database.DatabaseFactory
+import com.synac.presentation.data.repository.QuizQuestionRepositoryImpl
+import com.synac.presentation.domain.repository.QuizQuestionRepository
+import com.synac.presentation.presentation.route.quiz_question.deleteQuizQuestionById
+import com.synac.presentation.presentation.route.quiz_question.getAllQuizQuestions
+import com.synac.presentation.presentation.route.quiz_question.upsertQuizQuestion
+import com.synac.presentation.presentation.route.quiz_question.getQuizQuestionById
 import com.example.presentation.route.root
 import io.ktor.server.application.Application
 import io.ktor.server.routing.routing
