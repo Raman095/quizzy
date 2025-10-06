@@ -1,22 +1,22 @@
-package com.synac.presentation.presentation.route.quiz_question
+package com.synac.presentation.presentation.route.quiz_topic
 
-import com.synac.presentation.domain.repository.QuizQuestionRepository
+import com.synac.presentation.domain.repository.QuizTopicRepository
 import com.synac.presentation.domain.util.onFailure
 import com.synac.presentation.domain.util.onSuccess
 import com.synac.presentation.presentation.util.respondWithError
 import io.ktor.http.HttpStatusCode
-import io.ktor.server.response.respond
 import io.ktor.server.routing.Route
 import io.ktor.server.resources.*
+import io.ktor.server.response.respond
 
-fun Route.getQuizQuestionById(
-    repository: QuizQuestionRepository
+fun Route.getQuizTopicById(
+    quizTopicRepository: QuizTopicRepository
 ) {
-    get<QuestionRoutesPath.ById> { path ->
-        repository.getQuestionById(path.questionId)
-            .onSuccess { question ->
+    get<QuizTopicRoutePaths.ById> { path ->
+        quizTopicRepository.getTopicById(path.topic)
+            .onSuccess { quizTopic ->
                 call.respond(
-                    message = question,
+                    message = quizTopic,
                     status = HttpStatusCode.OK
                 )
             }

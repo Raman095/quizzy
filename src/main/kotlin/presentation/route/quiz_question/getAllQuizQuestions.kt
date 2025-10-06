@@ -9,15 +9,13 @@ import com.synac.presentation.presentation.util.respondWithError
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.response.respond
 import io.ktor.server.routing.Route
-import io.ktor.server.routing.get
+import io.ktor.server.resources.*
 
 fun Route.getAllQuizQuestions(
     repository: QuizQuestionRepository
 ) {
-    get(path = "/quiz/questions") {
-        val topicCode = call.queryParameters["topicCode"]?.toIntOrNull()
-        val limit = call.queryParameters["limit"]?.toIntOrNull()
-        repository.getAllQuestions(topicCode, limit)
+    get<QuestionRoutesPath> { path ->
+        repository.getAllQuestions(path.topicCode, path.limit)
             .onSuccess { questions ->
                 call.respond(
                     message = questions,
@@ -27,6 +25,5 @@ fun Route.getAllQuizQuestions(
             .onFailure { error ->
                 respondWithError(error)
             }
-
     }
 }

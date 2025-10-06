@@ -22,6 +22,11 @@ fun RequestValidationConfig.validateQuizQuestion() {
                     reason = "There must be at least one incorrect answer"
                 )
             }
+            quizQuestion.incorrectAnswer.any { it.isBlank()} -> {
+                ValidationResult.Invalid(
+                    reason = "Incorrect answers must not be empty"
+                )
+            }
             quizQuestion.explanation.isBlank() -> {
                 ValidationResult.Invalid (
                     reason = "Explanation must not be empty"

@@ -7,14 +7,13 @@ import com.synac.presentation.presentation.util.respondWithError
 import io.ktor.http.HttpStatusCode
 import io.ktor.server.response.respond
 import io.ktor.server.routing.Route
-import io.ktor.server.routing.delete
+import io.ktor.server.resources.*
 
 fun Route.deleteQuizQuestionById (
     repository: QuizQuestionRepository
 ) {
-    delete("/quiz/questions/{questionId}") {
-        val id = call.parameters["questionId"]
-        repository.deleteQuestionById(id)
+    delete<QuestionRoutesPath.ById> { path ->
+        repository.deleteQuestionById(path.questionId)
             .onSuccess {
                 call.respond(
                     HttpStatusCode.NoContent
@@ -23,5 +22,5 @@ fun Route.deleteQuizQuestionById (
             .onFailure { error ->
                 respondWithError(error)
             }
-        }
     }
+}
