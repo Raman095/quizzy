@@ -1,5 +1,6 @@
 package com.synac.presentation
 
+import com.synac.presentation.presentation.config.configureKoin
 import com.synac.presentation.presentation.config.configureLogging
 import com.synac.presentation.presentation.config.configureRouting
 import com.synac.presentation.presentation.config.configureSerialization
@@ -13,6 +14,7 @@ fun main(args: Array<String>) {
 
 @Suppress("unused")
 fun Application.module() {
+    configureKoin()
     configureStatusPages()
     configureValidation()
     configureSerialization()

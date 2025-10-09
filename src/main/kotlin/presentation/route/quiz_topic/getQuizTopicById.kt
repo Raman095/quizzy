@@ -10,10 +10,10 @@ import io.ktor.server.resources.*
 import io.ktor.server.response.respond
 
 fun Route.getQuizTopicById(
-    quizTopicRepository: QuizTopicRepository
+    repository: QuizTopicRepository
 ) {
     get<QuizTopicRoutePaths.ById> { path ->
-        quizTopicRepository.getTopicById(path.topic)
+        repository.getTopicById(path.topicId)
             .onSuccess { quizTopic ->
                 call.respond(
                     message = quizTopic,

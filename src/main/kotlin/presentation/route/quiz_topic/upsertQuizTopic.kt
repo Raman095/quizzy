@@ -12,11 +12,11 @@ import io.ktor.server.resources.*
 import io.ktor.server.response.respond
 
 fun Route.upsertQuizTopic(
-    quizTopicRepository: QuizTopicRepository
+    repository: QuizTopicRepository
 ) {
     post<QuizTopicRoutePaths> {
         val quizTopic = call.receive<QuizTopic>()
-        quizTopicRepository.upsertTopic(quizTopic)
+        repository.upsertTopic(quizTopic)
             .onSuccess {
                 call.respond(
                     message = "Quiz Topic added",

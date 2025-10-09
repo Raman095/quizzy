@@ -10,10 +10,10 @@ import io.ktor.server.resources.*
 import io.ktor.server.response.respond
 
 fun Route.deleteQuizTopicById(
-    topicRepository: QuizTopicRepository
+    repository: QuizTopicRepository
 ) {
     delete<QuizTopicRoutePaths.ById> { path ->
-        topicRepository.deleteTopicById(path.topic)
+        repository.deleteTopicById(path.topicId)
             .onSuccess {
                 call.respond(HttpStatusCode.NoContent)
             }
